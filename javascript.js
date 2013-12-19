@@ -1,7 +1,18 @@
 $(document).ready( function() {
 	
-	$("#removeURL").click( function() {
+	$("body").on('click', '#removeURL', function() {
 		removeURL();
+		$("#history").hide();
+	});
+	
+	$("input.url").click( function() {
+		$("#history").toggle();
+	});
+	
+	$("body").on('click', '#history li', function() {
+		var url = $(this).text();
+		$("input.url").val(url);
+		$("#history").hide();
 	});
 	
 	$("a").click( function() {
@@ -44,7 +55,6 @@ $(document).ready( function() {
 	        	$("p.error").text("");
 	        	$("code").text(data);
 
-            console.log(data[0]);
             if(data[0] == "<") {
               $("code").attr("class", "language-markup");
             } else {
@@ -98,7 +108,12 @@ function getURL() {
 		urlList = JSON.parse(urlList);
 	}
 	
-	console.log(urlList);
+	$("header").append('<nav id="history"><ul></ul><p id="removeURL">Delete URLs</p></nav>');
+	
+	for(var i=0; i < urlList.length; i++) {
+		
+		$("#history ul").append('<li>'+ urlList[i] +'</li>');
+	}
 	
 }
 

@@ -114,3 +114,43 @@ pre {
 	z-index: 0;
 	margin-bottom: 0px;
 }
+
+nav {
+	position: fixed;
+	background: white;
+	left: 12px;
+	right: 109px;
+	top: 40px;
+	display: none;
+	border: 1px solid #c1c1c1;
+	border-top: none;
+	max-height: 80%;
+	overflow: scroll;
+}
+
+nav ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+nav ul li {
+	list-style-type: none;
+	height: 27px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+
+nav ul li:hover {
+	background-color: rgba(54,108,245,0.6);
+}
+
+nav p {
+	margin: 0px;
+	font-size: 0.8em;
+	text-align: right;
+	padding-right: 10px;
+	cursor: pointer;
+}
+
+
+
