@@ -39,11 +39,13 @@ $(document).ready( function() {
 	        	$("p.error").text("");
 	        	var xmlstr = data.xml ? data.xml : (new XMLSerializer()).serializeToString(data);
 				//alert(xmlstr);
-	        	$("pre").text(xmlstr);
+	        	$("code").text(xmlstr);
+            Prism.highlightAll();
         	}
         });
         
 	});
+
 });
 
 
