@@ -29,7 +29,7 @@ $(document).ready( function() {
 		$("input.url").val(url);
 		
 		$.ajax({
-	    	dataType: "xml",
+	    	dataType: "text",
 	    	url: "proxy.php",
 	    	data: {url: url},
 	    	error: function(){
@@ -37,9 +37,7 @@ $(document).ready( function() {
 			},
 	        success: function(data){
 	        	$("p.error").text("");
-	        	var xmlstr = data.xml ? data.xml : (new XMLSerializer()).serializeToString(data);
-				//alert(xmlstr);
-	        	$("code").text(xmlstr);
+	        	$("code").text(data);
             Prism.highlightAll();
         	}
         });
