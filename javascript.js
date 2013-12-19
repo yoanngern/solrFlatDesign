@@ -38,6 +38,13 @@ $(document).ready( function() {
 	        success: function(data){
 	        	$("p.error").text("");
 	        	$("code").text(data);
+
+            console.log(data[0]);
+            if(data[0] == "<") {
+              $("code").attr("class", "language-markup");
+            } else {
+              $("code").attr("class", "language-javascript");
+            }
             Prism.highlightAll();
         	}
         });
