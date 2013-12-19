@@ -1,74 +1,97 @@
 $(document).ready( function() {
 	
+	getURL();
+	
+	
 	$("body").on('click', '#removeURL', function() {
-		removeURL();
+		deleteHistory();
 		$("#history").hide();
 	});
 	
-	$("input.url").click( function() {
+	
+	$("input.url").click( function(event) {
+		event.stopPropagation();
 		$("#history").toggle();
 	});
+	
 	
 	$("body").on('click', '#history li', function() {
 		var url = $(this).text();
 		$("input.url").val(url);
 		$("#history").hide();
+    });
+	
+	
+	$("body").on('click', '#history', function(event) {
+    	event.stopPropagation();
 	});
 	
-	$("a").click( function() {
+	
+	$("html").click( function() {
+    	$("#history").hide();
+	});
+	
+	
+	$("form input").change( function() {		
+		reloadResult();
+	});
+	
+	
+	$("header a").click( function() {
 		event.preventDefault();
-		
-		var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-		
-		$("form input").each( function() {
-			//console.log(this);
-			if($(this).val() != "") {
-				url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
-			}
-		});
-		
-		window.location.href = url;
-		
-	});
-	
-	$("form input").change( function() {
-		
-		var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-		
-		$("form input").each( function() {
-			//console.log(this);
-			if($(this).val() != "") {
-				url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
-			}
-		});
-		
-		$("input.url").val(url);
-		
-		$.ajax({
-	    	dataType: "text",
-	    	url: url,
-	    	error: function(){
-				$("p.error").text("This is not a valid URL.");
-			},
-	        success: function(data){
-	        	$("p.error").text("");
-	        	$("code").text(data);
-
-            if(data[0] == "<") {
-              $("code").attr("class", "language-markup");
-            } else {
-              $("code").attr("class", "language-javascript");
-            }
-            Prism.highlightAll();
-        	}
-        });
-        
-        saveURL(url);
-        getURL();
-        
+		search();
 	});
 
 });
+
+
+function reloadResult() {
+	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
+		
+	$("form input").each( function() {
+		if($(this).val() != "") {
+			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
+		}
+	});
+	
+	$("input.url").val(url);
+	
+	$.ajax({
+    	dataType: "text",
+    	url: url,
+    	error: function(){
+			$("p.error").text("This is not a valid URL.");
+		},
+        success: function(data){
+        	$("p.error").text("");
+        	$("code").text(data);
+
+            if(data[0] == "<") {
+            	$("code").attr("class", "language-markup");
+            } else {
+                $("code").attr("class", "language-javascript");
+            }
+            
+            Prism.highlightAll();
+    	}
+    });
+    
+    saveURL(url);
+    getURL();
+}
+
+
+function search() {
+    var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
+		
+	$("form input").each( function() {
+		if($(this).val() != "") {
+			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
+		}
+	});
+	
+	window.location.href = url;
+}
 
 
 function saveURL(url) {
@@ -79,6 +102,12 @@ function saveURL(url) {
 		urlList = [];
 	} else {
 		urlList = JSON.parse(urlList);
+	}
+	
+	for(var i=0; i < urlList.length; i++) {
+    	if(urlList[i] == url) {
+            urlList.splice(i,1);
+    	}
 	}
 	
 	var id = urlList.length;
@@ -92,11 +121,6 @@ function saveURL(url) {
 }
 
 
-function removeURL() {
-	localStorage.removeItem("urlSolr");
-}
-
-
 function getURL() {
 	
 	var urlList = localStorage.getItem("urlSolr");
@@ -107,8 +131,10 @@ function getURL() {
 		urlList = JSON.parse(urlList);
 	}
 	
-	//Properly done down there
-	//$("header").append('<nav id="history"><ul></ul><p id="removeURL">Delete URLs</p></nav>');
+	urlList.reverse();
+	
+	$("header nav").remove();
+	
 	$('header')
 	.append($('<nav>').attr('id','history')
 			.append($('<ul>'))
@@ -116,10 +142,16 @@ function getURL() {
 		   )
 	
 	for(var i=0; i < urlList.length; i++) {
-		
-		//$("#history ul").append('<li>'+ urlList[i] +'</li>');
 		$("#history ul").append($('<li>').text(urlList[i]));
 	}
+	
+}
+
+
+function deleteHistory() {
+	localStorage.removeItem("urlSolr");
+	
+	$("header nav").remove();
 	
 }
 
