@@ -19,12 +19,21 @@ $(document).ready( function() {
 		var url = $(this).text();
 		$("input.url").val(url);
 		$("#history").hide();
+		reloadResultFromURL(url);
     });
 	
 	
 	$("body").on('click', '#history', function(event) {
     	event.stopPropagation();
 	});
+	
+	
+	$("input.url").bind('paste', function(e) {
+	    setTimeout(function() {
+            var url = e.target.value;
+            reloadResultFromURL(url);
+        }, 0)
+    });
 	
 	
 	$("html").click( function() {
@@ -78,6 +87,33 @@ function reloadResult() {
     
     saveURL(url);
     getURL();
+}
+
+
+function reloadResultFromURL(url) {
+    var search = URLToArray(url);
+    
+    console.log(search);
+    
+    $("form input").each( function() {
+        var param = $(this).attr('class');
+        console.log(search[param]);
+        $(this).val(search[param]);
+    });
+    
+    reloadResult();
+    
+}
+
+
+function URLToArray(url) {
+  var request = {};
+  var pairs = url.substring(url.indexOf('?') + 1).split('&');
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split('=');
+    request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+  }
+  return request;
 }
 
 
