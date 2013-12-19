@@ -1,4 +1,9 @@
 $(document).ready( function() {
+	
+	$("#removeURL").click( function() {
+		removeURL();
+	});
+	
 	$("a").click( function() {
 		event.preventDefault();
 		
@@ -49,10 +54,53 @@ $(document).ready( function() {
         	}
         });
         
+        saveURL(url);
+        getURL();
+        
 	});
 
 });
 
+
+function saveURL(url) {
+	
+	var urlList = localStorage.getItem("urlSolr");
+	
+	if(urlList == null) {
+		urlList = [];
+	} else {
+		urlList = JSON.parse(urlList);
+	}
+	
+	var id = urlList.length;
+	
+	var list = [];
+	list = urlList;
+	list[id] = url;
+	
+	localStorage.setItem("urlSolr", JSON.stringify(list));
+    
+}
+
+
+function removeURL() {
+	localStorage.removeItem("urlSolr");
+}
+
+
+function getURL() {
+	
+	var urlList = localStorage.getItem("urlSolr");
+	
+	if(urlList == null) {
+		urlList = [];
+	} else {
+		urlList = JSON.parse(urlList);
+	}
+	
+	console.log(urlList);
+	
+}
 
 
 function urlencode(str) {
