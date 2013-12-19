@@ -1,197 +1,226 @@
-$(document).ready( function() {
-	
+$(document).ready(function () {
+
 	getURL();
-	
-	
-	$("body").on('click', '#removeURL', function() {
+
+
+	$("body").on('click', '#removeURL', function () {
 		deleteHistory();
 		$("#history").hide();
 	});
-	
-	
-	$("input.url").click( function(event) {
+
+
+	$("input.url").click(function (event) {
 		event.stopPropagation();
 		$("#history").toggle();
 	});
-	
-	
-	$("body").on('click', '#history li', function() {
+
+
+	$("body").on('click', '#history li', function () {
 		var url = $(this).text();
 		$("input.url").val(url);
 		$("#history").hide();
 		reloadResultFromURL(url);
-    });
-	
-	
-	$("body").on('click', '#history', function(event) {
-    	event.stopPropagation();
 	});
-	
-	
-	$("input.url").bind('paste', function(e) {
-	    setTimeout(function() {
-            var url = e.target.value;
-            reloadResultFromURL(url);
-        }, 0)
-    });
-	
-	
-	$("html").click( function() {
-    	$("#history").hide();
+
+
+	$("body").on('click', '#history', function (event) {
+		event.stopPropagation();
 	});
-	
-	
-	$("form input").change( function() {		
+
+
+	$("input.url").bind('paste', function (e) {
+		setTimeout(function () {
+			var url = e.target.value;
+			reloadResultFromURL(url);
+		}, 0)
+	});
+
+
+	$("html").click(function () {
+		$("#history").hide();
+	});
+
+
+	$("form input").change(function () {
 		reloadResult();
 	});
-	
-	
-	$("header a").click( function() {
+
+
+	$("header a").click(function () {
 		event.preventDefault();
 		search();
 	});
 
+	setLabel();
+	$('.checkbox').on('change', 'input', setLabel)
 });
 
 
 function reloadResult() {
 	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-		
-	$("form input").each( function() {
-		if($(this).val() != "") {
+	//For each input adds a get property to the query url
+	$("form input").each(function () {
+		if ($(this).val() != "") {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
 	});
-	
+
 	$("input.url").val(url);
-	
+
 	$.ajax({
-    	dataType: "text",
-    	url: url,
-    	error: function(){
+		dataType: "text",
+		url: url,
+		error: function () {
 			$("p.error").text("This is not a valid URL.");
 		},
-        success: function(data){
-        	$("p.error").text("");
-        	$("code").text(data);
+		success: function (data) {
+			$("p.error").text("");
+			$("code").text(data);
 
-            if(data[0] == "<") {
-            	$("code").attr("class", "language-markup");
-            } else {
-                $("code").attr("class", "language-javascript");
-            }
-            
-            Prism.highlightAll();
-    	}
-    });
-    
-    saveURL(url);
-    getURL();
+			if (data[0] == "<") {
+				$("code").attr("class", "language-markup");
+			} else {
+				$("code").attr("class", "language-javascript");
+			}
+
+			Prism.highlightAll();
+		}
+	});
+
+	saveURL(url);
+	getURL();
 }
 
 
 function reloadResultFromURL(url) {
-    var search = URLToArray(url);
-    
-    console.log(search);
-    
-    $("form input").each( function() {
-        var param = $(this).attr('class');
-        console.log(search[param]);
-        $(this).val(search[param]);
-    });
-    
-    reloadResult();
-    
+	var search = URLToArray(url);
+
+	console.log(search);
+
+	$("form input").each(function () {
+		var param = $(this).attr('class');
+		console.log(search[param]);
+		$(this).val(search[param]);
+	});
+
+	reloadResult();
+
 }
 
 
 function URLToArray(url) {
-  var request = {};
-  var pairs = url.substring(url.indexOf('?') + 1).split('&');
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i].split('=');
-    request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
-  }
-  return request;
+	var request = {};
+	var pairs = url.substring(url.indexOf('?') + 1).split('&');
+	for (var i = 0; i < pairs.length; i++) {
+		var pair = pairs[i].split('=');
+		request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+	}
+	return request;
 }
 
 
 function search() {
-    var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-		
-	$("form input").each( function() {
-		if($(this).val() != "") {
+	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
+
+	$("form input").each(function () {
+		if ($(this).val() != "") {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
 	});
-	
+
 	window.location.href = url;
 }
 
 
 function saveURL(url) {
-	
+
 	var urlList = localStorage.getItem("urlSolr");
-	
-	if(urlList == null) {
+
+	if (urlList == null) {
 		urlList = [];
 	} else {
 		urlList = JSON.parse(urlList);
 	}
-	
-	for(var i=0; i < urlList.length; i++) {
-    	if(urlList[i] == url) {
-            urlList.splice(i,1);
-    	}
+
+	for (var i = 0; i < urlList.length; i++) {
+		if (urlList[i] == url) {
+			urlList.splice(i, 1);
+		}
 	}
-	
+
 	var id = urlList.length;
-	
+
 	var list = [];
 	list = urlList;
 	list[id] = url;
-	
+
 	localStorage.setItem("urlSolr", JSON.stringify(list));
-    
+
 }
 
 
 function getURL() {
-	
+
 	var urlList = localStorage.getItem("urlSolr");
-	
-	if(urlList == null) {
+
+	if (urlList == null) {
 		urlList = [];
 	} else {
 		urlList = JSON.parse(urlList);
 	}
-	
+
 	urlList.reverse();
-	
+
 	$("header nav").remove();
-	
+
 	$('header')
-	.append($('<nav>').attr('id','history')
+		.append($('<nav>').attr('id', 'history')
 			.append($('<ul>'))
-			.append($('<p>').attr('id','removeURL').text('Delete URLs'))
-		   )
-	
-	for(var i=0; i < urlList.length; i++) {
+			.append($('<p>').attr('id', 'removeURL').text('Delete URLs'))
+	)
+
+	for (var i = 0; i < urlList.length; i++) {
 		$("#history ul").append($('<li>').text(urlList[i]));
 	}
-	
+
 }
 
 
 function deleteHistory() {
 	localStorage.removeItem("urlSolr");
-	
+
 	$("header nav").remove();
-	
+
 }
 
 
 function urlencode(str) {
-    return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
+	return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
+}
+
+//toggle the displayed label
+function setLabel() {
+	switch ($('.checkbox input:checked').val()) {
+	case 'short':
+		$('form .l, form .f').each(function () {
+			$(this).hide(400)
+		})
+		$('form .s').each(function () {
+			$(this).show(400)
+		})
+		break;
+	case 'long':
+		$('form .s, form .f').each(function () {
+			$(this).hide(400)
+		})
+		$('form .l').each(function () {
+			$(this).show(400)
+		})
+		break;
+	case 'full':
+		$('form span').each(function () {
+			$(this).show(400)
+		})
+		break;
+	}
 }

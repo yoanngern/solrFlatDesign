@@ -1,60 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-		<meta charset="utf-8">
-        <title>Recherche Solr</title>
-        <link rel="stylesheet" type="text/css" href="style.css"></link>
-        <link rel="stylesheet" type="text/css" href="ext/prism.css"></link>
 
-    <body>
-    	
-    	<form action="index.php" method="post" accept-charset="utf-8">
-    		<table>
-    			<tbody>
-    				<tr>
-    					<td>q</td>
-    					<td><input class="q"></input></td>
-    				</tr>
-    				<tr>
-	    				<td>fq</td>
-	    				<td><input class="fq"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>start</td>
-	    				<td><input class="start"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>rows</td>
-	    				<td><input class="rows"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>sort</td>
-	    				<td><input class="sort"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>fl</td>
-	    				<td><input class="fl"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>wt</td>
-	    				<td><input class="wt"></input></td>
-    				</tr>		   
-    				<tr>		   
-	    				<td>tr</td>
-	    				<td><input class="tr"></input></td>
-    				</tr>
-    			</tbody>
-    		</table>
-    	</form>
-    	<p class="error"></p>
-      <pre><code class="language-markup"></code></pre>
-    	<header>
-	    	<input class="url">
-	    	<a href="">Search</a>
-    	</header>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="ext/prism.js"></script>
-        <script type="text/javascript" src="javascript.js"></script>
-    </head>
-    </body>
+<head>
+	<meta charset="utf-8">
+	<title>Recherche Solr</title>
+	<link rel="stylesheet" type="text/css" href="style.css"></link>
+	<link rel="stylesheet" type="text/css" href="ext/prism.css"></link>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="ext/prism.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+</head>
+
+<body>
+
+	<header>
+		<input class="url">
+		<a href="">Search</a>
+	</header>
+	<form action="index.php" method="post" accept-charset="utf-8">
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<span class="l">Query</span>
+						<span class="f"> - </span>
+						<span class="s">q</span>
+					</td>
+					<td>
+						<input class="q"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>fq</td>
+					<td>
+						<input class="fq"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>start</td>
+					<td>
+						<input class="start"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>rows</td>
+					<td>
+						<input class="rows"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>sort</td>
+					<td>
+						<input class="sort"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>fl</td>
+					<td>
+						<input class="fl"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>wt</td>
+					<td>
+						<input class="wt"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>tr</td>
+					<td>
+						<input class="tr"></input>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<aside class="checkbox" > 
+		<label for="Label">Label complet</label>
+		<input type="radio" name="Label" value="full"/>
+		<label for="Label">Label cours</label>
+		<input type="radio" name="Label" value="short" checked />
+		<label for="Label">Label long</label>
+		<input type="radio" name="Label" value="long" />
+	</aside>
+	<p class="error"></p>
+	<pre>
+		<code class="language-markup"></code>
+	</pre>
+
+</body>
+
 </html>

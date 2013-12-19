@@ -80,7 +80,7 @@ table {
 tr {
 	height: 50px;
 }
-form input {
+form table input {
 	width: 100%;
 	line-height: 20px;
 	font-size: 20px;
@@ -89,6 +89,7 @@ form input {
 td:first-child {
 	text-align: right;
 	font-weight: 600;
+	width:200px;
 }
 pre {
 	display: inline-block;
@@ -136,4 +137,16 @@ nav p {
 	text-align: right;
 	padding-right: 10px;
 	cursor: pointer;
+}
+.checkbox {
+	left: 208px;
+	position: fixed;
+	top: 470px;
+	width: 540px;
+}
+label {
+	margin-left: 60px;
+}
+label:first-child {
+	margin-left: 0;
 }
