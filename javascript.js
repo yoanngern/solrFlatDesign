@@ -107,11 +107,18 @@ function getURL() {
 		urlList = JSON.parse(urlList);
 	}
 	
-	$("header").append('<nav id="history"><ul></ul><p id="removeURL">Delete URLs</p></nav>');
+	//Properly done down there
+	//$("header").append('<nav id="history"><ul></ul><p id="removeURL">Delete URLs</p></nav>');
+	$('header')
+	.append($('<nav>').attr('id','history')
+			.append($('<ul>'))
+			.append($('<p>').attr('id','removeURL').text('Delete URLs'))
+		   )
 	
 	for(var i=0; i < urlList.length; i++) {
 		
-		$("#history ul").append('<li>'+ urlList[i] +'</li>');
+		//$("#history ul").append('<li>'+ urlList[i] +'</li>');
+		$("#history ul").append($('<li>').text(urlList[i]));
 	}
 	
 }
