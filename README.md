@@ -3,4 +3,5 @@ solrFlatDesign
 
 Solr Admin Consol - Flat Design
 
-This consol require a PHP server
+The project require to be in this place:
+	SolrProject/webapps

@@ -46,8 +46,7 @@ $(document).ready( function() {
 		
 		$.ajax({
 	    	dataType: "text",
-	    	url: "proxy.php",
-	    	data: {url: url},
+	    	url: url,
 	    	error: function(){
 				$("p.error").text("This is not a valid URL.");
 			},
