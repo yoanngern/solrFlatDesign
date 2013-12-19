@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+		<meta charset="utf-8">
+        <title>Recherche Solr</title>
+        <link rel="stylesheet" type="text/css" href="style.css"></link>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="javascript.js"></script>
+    </head>
+    <body>
+    	
+    	<form action="index.php" method="post" accept-charset="utf-8">
+    		<table>
+    			<tbody>
+    				<tr>
+    					<td>q</td>
+    					<td><input class="q"></input></td>
+    				</tr>
+    				<tr>
+	    				<td>fq</td>
+	    				<td><input class="fq"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>start</td>
+	    				<td><input class="start"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>rows</td>
+	    				<td><input class="rows"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>sort</td>
+	    				<td><input class="sort"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>fl</td>
+	    				<td><input class="fl"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>wt</td>
+	    				<td><input class="wt"></input></td>
+    				</tr>		   
+    				<tr>		   
+	    				<td>tr</td>
+	    				<td><input class="tr"></input></td>
+    				</tr>
+    			</tbody>
+    		</table>
+    		
+    	</form>
+    	<p class="error"></p>
+    	<pre></pre>
+    	<header>
+	    	<input class="url">
+	    	<a href="">Search</a>
+    	</header>
+    </body>
+</html>
