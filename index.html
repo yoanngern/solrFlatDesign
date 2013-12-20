@@ -13,90 +13,99 @@
 
 <body>
 
-	
+
 	<form action="index.php" method="post" accept-charset="utf-8">
 		<table>
 			<tbody>
 				<tr>
 					<td>
 						<span class="l">Query</span>
-						<span class="f"> - </span>
+						<span class="f">-</span>
 						<span class="s">q</span>
 					</td>
 					<td>
-						<input class="q"></input>
+						<input type="text" class="q"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<span class="l">Filter Query</span>
-						<span class="f"> - </span>
+						<span class="f">-</span>
 						<span class="s">fq</span>
 					</td>
 					<td>
-						<input class="fq"></input>
+						<input type="text" class="fq"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<span class="l">Start at</span>
-						<span class="f"> - </span>
+						<span class="f">-</span>
 						<span class="s">start</span>
 					</td>
 					<td>
-						<input class="start"></input>
+						<input type="number" class="start"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<span class="l">Nb of rows</span>
-						<span class="f"> - </span>
+						<span class="f">-</span>
 						<span class="s">rows</span>
 					</td>
 					<td>
-						<input class="rows"></input>
+						<input type="number" class="rows"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>sort</td>
 					<td>
-						<input class="sort"></input>
+						<input type="text" class="sort"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>fl</td>
 					<td>
-						<input class="fl"></input>
+						<input type="text" class="fl"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>wt</td>
 					<td>
-						<input class="wt"></input>
+						<input type="text" class="wt"></input>
 					</td>
 				</tr>
 				<tr>
 					<td>tr</td>
 					<td>
-						<input class="tr"></input>
+						<input type="text" class="tr"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>Label</td>
+					<td>
+						<span>
+							<label for="Label">Full</label>
+							<input type="radio" name="Label" value="full" />
+						</span>
+						<span>
+							<label for="Label">Short</label>
+							<input type="radio" name="Label" value="short" checked />
+						</span>
+						<span>
+							<label for="Label">Long</label>
+							<input type="radio" name="Label" value="long" />
+						</span>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</form>
-	<aside class="checkbox" > 
-		<label for="Label">Label complet</label>
-		<input type="radio" name="Label" value="full"/>
-		<label for="Label">Label cours</label>
-		<input type="radio" name="Label" value="short" checked />
-		<label for="Label">Label long</label>
-		<input type="radio" name="Label" value="long" />
-	</aside>
 	<p class="error"></p>
 	<pre>
 		<code class="language-markup"></code>
 	</pre>
-    <header>
+	<header>
 		<input class="url">
 		<a href="">Search</a>
 	</header>

@@ -80,7 +80,7 @@ table {
 tr {
 	height: 50px;
 }
-form table input {
+form table input[type="text"], form table input[type="number"] {
 	width: 100%;
 	line-height: 20px;
 	font-size: 20px;
@@ -139,14 +139,17 @@ nav p {
 	cursor: pointer;
 }
 .checkbox {
-	left: 208px;
 	position: fixed;
 	top: 470px;
-	width: 540px;
+	width:39%;
 }
-label {
-	margin-left: 60px;
+
+.checkbox p {
+	margin:0;
+	font-weight:600;
 }
-label:first-child {
-	margin-left: 0;
+
+
+
+.checkbox span {
 }

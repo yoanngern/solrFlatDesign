@@ -41,7 +41,7 @@ $(document).ready(function () {
 	});
 
 
-	$("form input").change(function () {
+	$("input[type='text'], input[type='number']").change(function () {
 		reloadResult();
 	});
 
@@ -52,14 +52,14 @@ $(document).ready(function () {
 	});
 
 	setLabel();
-	$('.checkbox').on('change', 'input', setLabel)
+	$("input[type='radio']").on('change', setLabel)
 });
 
 
 function reloadResult() {
 	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
 	//For each input adds a get property to the query url
-	$("form input").each(function () {
+	$("input[type='text'], input[type='number']").each(function () {
 		if ($(this).val() != "") {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
@@ -122,7 +122,7 @@ function URLToArray(url) {
 function search() {
 	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
 
-	$("form input").each(function () {
+	$("input[type='text'], input[type='number']").each(function () {
 		if ($(this).val() != "") {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
@@ -200,26 +200,26 @@ function urlencode(str) {
 
 //toggle the displayed label
 function setLabel() {
-	switch ($('.checkbox input:checked').val()) {
+	switch ($('input[type="radio"]:checked').val()) {
 	case 'short':
 		$('form .l, form .f').each(function () {
-			$(this).hide(400)
+			$(this).hide()
 		})
 		$('form .s').each(function () {
-			$(this).show(400)
+			$(this).show()
 		})
 		break;
 	case 'long':
 		$('form .s, form .f').each(function () {
-			$(this).hide(400)
+			$(this).hide()
 		})
 		$('form .l').each(function () {
-			$(this).show(400)
+			$(this).show()
 		})
 		break;
 	case 'full':
 		$('form span').each(function () {
-			$(this).show(400)
+			$(this).show()
 		})
 		break;
 	}
