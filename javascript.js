@@ -1,7 +1,8 @@
 $(document).ready(function () {
-
+	//At start functions
 	getURL();
-
+	setLabel();
+	toggleTR();
 
 	$("body").on('click', '#removeURL', function () {
 		deleteHistory();
@@ -40,10 +41,9 @@ $(document).ready(function () {
 		$("#history").hide();
 	});
 
+	$('input.wt').change(toggleTR)
 
-	$("input[type='text'], input[type='number']").change(function () {
-		reloadResult();
-	});
+	$("input[type='text'], input[type='number']").on('change', reloadResult);
 
 
 	$("header a").click(function () {
@@ -51,7 +51,6 @@ $(document).ready(function () {
 		search();
 	});
 
-	setLabel();
 	$("input[type='radio']").on('change', setLabel)
 });
 
@@ -223,4 +222,12 @@ function setLabel() {
 		})
 		break;
 	}
+}
+//Toggle the tr input, no reason to display it if wt was not set
+function toggleTR(){
+	if ($('input.wt').val() == '') {
+			$('input.tr').parent().parent().hide();
+		} else {
+			$('input.tr').parent().parent().show();
+		}
 }
