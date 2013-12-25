@@ -41,10 +41,9 @@ $(document).ready(function () {
 		$("#history").hide();
 	});
 
-	//$('input.wt').change(toggleTR)
 	$('input.wt').keyup(toggleTR)
 
-	$("input[type='text'], input[type='number']").on('change', reloadResult);
+	$("input[type='text'], input[type='number'], input[type='checkbox']").on('change', reloadResult);
 
 
 	$("header a").click(function () {
@@ -64,7 +63,9 @@ function reloadResult() {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
 	});
-
+	if ($(".debugQuery").is($(':checked'))) {
+		url = url + '&debugQuery=true';
+	}
 	$("input.url").val(url);
 
 	$.ajax({
@@ -225,10 +226,10 @@ function setLabel() {
 	}
 }
 //Toggle the tr input, no reason to display it if wt was not set
-function toggleTR(){
+function toggleTR() {
 	if ($('input.wt').val() == 'xslt') {
-			$('input.tr').parent().parent().show();
-		} else {
-			$('input.tr').parent().parent().hide();
-		}
+		$('input.tr').parent().parent().show();
+	} else {
+		$('input.tr').parent().parent().hide();
+	}
 }
