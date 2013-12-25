@@ -41,7 +41,8 @@ $(document).ready(function () {
 		$("#history").hide();
 	});
 
-	$('input.wt').change(toggleTR)
+	//$('input.wt').change(toggleTR)
+	$('input.wt').keyup(toggleTR)
 
 	$("input[type='text'], input[type='number']").on('change', reloadResult);
 
@@ -225,9 +226,9 @@ function setLabel() {
 }
 //Toggle the tr input, no reason to display it if wt was not set
 function toggleTR(){
-	if ($('input.wt').val() == '') {
-			$('input.tr').parent().parent().hide();
-		} else {
+	if ($('input.wt').val() == 'xslt') {
 			$('input.tr').parent().parent().show();
+		} else {
+			$('input.tr').parent().parent().hide();
 		}
 }
