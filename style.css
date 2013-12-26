@@ -2,7 +2,7 @@ body {
 	font-family: "helveticaNeue", sans-serif;
 	font-size: 20px;
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 	margin: 0px;
 }
 pre {
@@ -57,11 +57,11 @@ input.url:focus {
 	outline: none;
 }
 form {
-	width: 39%;
+	width: 45%;
 	float: left;
-	position: fixed;
+	position: relative;
 	top: 50px;
-	left: 0px;
+	left: 0;
 	z-index: 10;
 }
 p.error {
@@ -80,8 +80,9 @@ table {
 tr {
 	height: 50px;
 }
-form table input[type="text"], form table input[type="number"] {
-	width: 100%;
+form table input[type="text"],
+form table input[type="number"] {
+	width: 96%;
 	line-height: 20px;
 	font-size: 20px;
 	padding: 0px;
@@ -89,16 +90,16 @@ form table input[type="text"], form table input[type="number"] {
 td:first-child {
 	text-align: right;
 	font-weight: 600;
-	width:200px;
+	width: 200px;
 }
 pre {
 	display: inline-block;
 	float: right;
 	overflow: auto;
-	width: 56%;
+	width: 50%;
 	padding: 50px 2% 20px;
 	background-color: #F7F7F7;
-	top: 20px;
+	top: 40px;
 	position: fixed;
 	right: 0px;
 	bottom: 0px;
@@ -141,15 +142,16 @@ nav p {
 .checkbox {
 	position: fixed;
 	top: 470px;
-	width:39%;
+	width: 39%;
 }
-
 .checkbox p {
-	margin:0;
-	font-weight:600;
+	margin: 0;
+	font-weight: 600;
 }
-
-
-
-.checkbox span {
+.checkbox span {} .add {
+	position: absolute;
+}
+.del {
+	position: absolute;
+	right: -36px;
 }

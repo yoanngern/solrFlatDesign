@@ -52,6 +52,26 @@ $(document).ready(function () {
 	});
 
 	$("input[type='radio']").on('change', setLabel)
+
+	//Adds or delete a new tr for the facet.query
+	$('form').on('click', '.del', function () {
+		$(this).parent().parent().remove();
+	})
+	$('form').on('click', '.add', function () {
+		var tr = $('<tr>')
+		tr.append(
+			$('<td>').text('facet.query')
+		).append(
+			$('<td>').append(
+				$('<input>').attr('type', 'text').addClass('facet.query')
+			).append(
+				$('<input>').attr('type', 'button').addClass('add').val('+')
+			).append(
+				$('<input>').attr('type', 'button').addClass('del').val('-')
+			)
+		)
+		$(this).parent().parent().after(tr);
+	})
 });
 
 
@@ -66,6 +86,20 @@ function reloadResult() {
 	if ($(".debugQuery").is($(':checked'))) {
 		url = url + '&debugQuery=true';
 	}
+	facet();
+	function facet() {
+		var test = false;
+
+		$("[class*='facet']").each(function () {
+			if ($(this).val() != '') {
+				test = true;
+			}
+		})
+		if (test) {
+			url = url + '&facet=true'
+		}
+	}
+
 	$("input.url").val(url);
 
 	$.ajax({
@@ -98,7 +132,7 @@ function reloadResultFromURL(url) {
 
 	console.log(search);
 
-	$("form input").each(function () {
+	$("form input[type=text], form input[type=number]").each(function () {
 		var param = $(this).attr('class');
 		console.log(search[param]);
 		$(this).val(search[param]);
