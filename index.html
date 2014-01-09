@@ -13,56 +13,144 @@
 
 <body>
 
-	
+
 	<form action="index.php" method="post" accept-charset="utf-8">
 		<table>
 			<tbody>
 				<tr>
+<<<<<<< HEAD
 					<td data-long="Query">q</td>
+=======
 					<td>
-						<input class="q"></input>
+						<span class="l">Query</span>
+						<span class="f">-</span>
+						<span class="s">q</span>
+					</td>
+>>>>>>> 1864b0477cac1bc8515b2049deb5dd4cfb897703
+					<td>
+						<input type="text" class="q"></input>
 					</td>
 				</tr>
 				<tr>
+<<<<<<< HEAD
 					<td data-long="Filter Query">fq</td>
+=======
 					<td>
-						<input class="fq"></input>
+						<span class="l">Filter Query</span>
+						<span class="f">-</span>
+						<span class="s">fq</span>
+					</td>
+>>>>>>> 1864b0477cac1bc8515b2049deb5dd4cfb897703
+					<td>
+						<input type="text" class="fq"></input>
 					</td>
 				</tr>
 				<tr>
+<<<<<<< HEAD
 					<td data-long="Start at">start</td>
+=======
 					<td>
-						<input class="start"></input>
+						<span class="l">Start at</span>
+						<span class="f">-</span>
+						<span class="s">start</span>
+					</td>
+>>>>>>> 1864b0477cac1bc8515b2049deb5dd4cfb897703
+					<td>
+						<input type="number" class="start"></input>
 					</td>
 				</tr>
 				<tr>
+<<<<<<< HEAD
 					<td data-long="Nb of rows">rows</td>
+=======
 					<td>
-						<input class="rows"></input>
+						<span class="l">Nb of rows</span>
+						<span class="f">-</span>
+						<span class="s">rows</span>
+					</td>
+>>>>>>> 1864b0477cac1bc8515b2049deb5dd4cfb897703
+					<td>
+						<input type="number" class="rows"></input>
 					</td>
 				</tr>
 				<tr>
-					<td>sort</td>
 					<td>
-						<input class="sort"></input>
+						<span class="l">Sort query by</span>
+						<span class="f">-</span>
+						<span class="s">sort</span>
+					</td>
+					<td>
+						<input type="text" class="sort"></input>
 					</td>
 				</tr>
 				<tr>
-					<td>fl</td>
 					<td>
-						<input class="fl"></input>
+						<span class="l">Displayed fields</span>
+						<span class="f">-</span>
+						<span class="s">fl</span>
+					</td>
+					<td>
+						<input type="text" class="fl"></input>
 					</td>
 				</tr>
 				<tr>
-					<td>wt</td>
 					<td>
-						<input class="wt"></input>
+						<span class="l">Exit format</span>
+						<span class="f">-</span>
+						<span class="s">wt</span>
+					</td>
+					<td>
+						<input type="text" class="wt"></input>
 					</td>
 				</tr>
 				<tr>
-					<td>tr</td>
 					<td>
-						<input class="tr"></input>
+						<span class="l">XSLT file path</span>
+						<span class="f">-</span>
+						<span class="s">tr</span>
+					</td>
+					<td>
+						<input type="text" class="tr" placeholder="Path to file for XSLT transformation"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						facet.field
+					</td>
+					<td>
+						<input type="text" class="facet.field"></input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						facet.query
+					</td>
+					<td>
+						<input type="text" class="facet.query"></input>
+						<input type="button" class="add" value="+" />
+					</td>
+				</tr>
+				<tr>
+					<td>Label</td>
+					<td>
+						<span>
+							<label for="Label">Full</label>
+							<input type="radio" name="Label" value="full" />
+						</span>
+						<span>
+							<label for="Label">Short</label>
+							<input type="radio" name="Label" value="short" checked />
+						</span>
+						<span>
+							<label for="Label">Long</label>
+							<input type="radio" name="Label" value="long" />
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Debug Query</td>
+					<td>
+						<input type="checkbox" class="debugQuery"></input>
 					</td>
 				</tr>
 				<tr>
@@ -74,6 +162,7 @@
 			</tbody>
 		</table>
 	</form>
+<<<<<<< HEAD
 	
 	<aside class="checkbox" > 
 		<label for="Label">Label complet</label>
@@ -83,11 +172,13 @@
 		<label for="Label">Label long</label>
 		<input type="radio" name="Label" value="long" />
 	</aside>
+=======
+>>>>>>> 1864b0477cac1bc8515b2049deb5dd4cfb897703
 	<p class="error"></p>
 	<pre>
 		<code class="language-markup"></code>
 	</pre>
-    <header>
+	<header>
 		<input class="url">
 		<a href="">Search</a>
 	</header>
