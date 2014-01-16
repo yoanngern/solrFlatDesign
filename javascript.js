@@ -41,7 +41,7 @@ $(document).ready(function () {
 	});
 
 
-	$("form input").change(function () {
+	$("form input, form textarea").change(function () {
 		reloadResult();
 	});
 
@@ -63,7 +63,12 @@ function reloadResult() {
 		if ($(this).val() != "") {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
+		
 	});
+	
+	if ($("form textarea.custom") != "") {
+    	url = url + '&' + $("form textarea.custom").val();
+	}
 
 	$("input.url").val(url);
 
@@ -127,6 +132,10 @@ function search() {
 			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
 		}
 	});
+	
+	if ($("form textarea.custom") != "") {
+    	url = url + '&' + $("form textarea.custom").val();
+	}
 
 	window.location.href = url;
 }

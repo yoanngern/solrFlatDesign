@@ -80,16 +80,22 @@ table {
 tr {
 	height: 50px;
 }
-form table input {
+form table input,
+form table textarea {
 	width: 100%;
 	line-height: 20px;
 	font-size: 20px;
 	padding: 0px;
 }
+
+form table textarea {
+    height: 200px;
+}
+
 td:first-child {
 	text-align: right;
 	font-weight: 600;
-	width:200px;
+	width:100px;
 }
 pre {
 	display: inline-block;
