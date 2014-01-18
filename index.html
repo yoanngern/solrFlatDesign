@@ -18,45 +18,57 @@
 		<table>
 			<tbody>
 				<tr>
-					<td data-long="Query">q</td>
+					<td data-long="Query" data-info="la requête">q</td>
 					<td>
 						<input class="q"></input>
 					</td>
 				</tr>
 				<tr>
-					<td data-long="Filter Query">fq</td>
+					<td data-long="Filter Query" data-info="le filtre de requête">fq</td>
 					<td>
 						<input class="fq"></input>
 					</td>
 				</tr>
 				<tr>
-					<td data-long="Start at">start</td>
+					<td data-long="Start at" data-info="le numéro du premier document à retourner">start</td>
 					<td>
 						<input class="start"></input>
 					</td>
 				</tr>
 				<tr>
-					<td data-long="Nb of rows">rows</td>
+					<td data-long="Nb of rows" data-info="le nombre de documents à retourner">rows</td>
 					<td>
 						<input class="rows"></input>
 					</td>
 				</tr>
 				<tr>
-				    <td>sort</td>
+				    <td data-info="paramètre de tri (ex: city.code asc, city.name desc)">sort</td>
 					<td>
 						<input class="sort"></input>
 					</td>
 				</tr>
 				<tr>
-					<td data-long="Exit format">wt</td>
+					<td data-long="Field List" data-info="la liste des champs à afficher">fl</td>
+					<td>
+						<input class="fl"></input>
+					</td>
+				</tr>
+				<tr>
+					<td data-long="Exit format" data-info="le format de sortie">wt</td>
 					<td>
 						<input class="wt"></input>
 					</td>
 				</tr>
 				<tr>
+					<td data-long="Transformation sheet" data-info="indique le fichier xslt à utiliser (si wt=xslt)">tr</td>
+					<td>
+						<input class="tr"></input>
+					</td>
+				</tr>
+				<tr>
 					<td>custom</td>
 					<td>
-						<textarea class="custom"></textarea>
+						<textarea class="custom" data-info="paramètres suplémentaires"></textarea>
 					</td>
 				</tr>
 			</tbody>

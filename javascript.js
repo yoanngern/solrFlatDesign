@@ -50,6 +50,18 @@ $(document).ready(function () {
 		event.preventDefault();
 		search();
 	});
+	
+	$("tr td:first-child").mouseover( function () {
+    	var value = $(this).attr("data-info");
+    	if(value != null) {
+    	    var box = "<td class='info'><div>"+ value +"</div></td>";
+            $(this).parent().append(box);
+        }
+	});
+	
+	$("tr td:first-child").mouseleave( function () {
+    	$("td.info").remove();
+	});
 
 	setLabel();
 	$('.checkbox').on('change', 'input', setLabel)

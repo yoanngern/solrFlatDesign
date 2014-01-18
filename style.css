@@ -97,6 +97,20 @@ td:first-child {
 	font-weight: 600;
 	width:100px;
 }
+
+tr td.info {
+    position: absolute;
+left: 5px;
+margin-top: 40px;
+}
+
+tr td.info div {
+    background-color: #eeeeee;
+    font-size: 0.7em;
+    padding: 5px;
+    
+}
+
 pre {
 	display: inline-block;
 	float: right;
