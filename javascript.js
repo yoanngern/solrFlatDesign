@@ -110,27 +110,69 @@ function reloadResult() {
 
 
 function reloadResultFromURL(url) {
+	
 	var search = URLToArray(url);
-
-	console.log(search);
-
-	$("form input").each(function () {
-		var param = $(this).attr('class');
-		console.log(search[param]);
-		$(this).val(search[param]);
-	});
+	
+	var custom = "";
+	
+	for (var i = 0; i < search.length; i++) {
+	    
+	    var finded = false; 
+	    
+	    if(search[i]['key'] == 'indent' || search[i]['key'] == 'version') {
+    	    finded = true;
+	    }
+	    
+	    $("form input").each(function () {
+		    var param = $(this).attr('class');
+		    if(param == search[i]['key']) {
+    		    $(this).val(search[i]['value']);
+    		    finded = true;
+		    }
+        });
+        
+        if(!finded) {
+            if(custom == "") {
+    	        custom = custom + search[i]['key'] + '=' + search[i]['value'];
+            } else {
+                custom = custom + '\n&\n' + search[i]['key'] + '=' + search[i]['value'];
+            }
+        }
+	}
+	
+	$("form textarea.custom").html(custom);
 
 	reloadResult();
+	
 
+}
+
+function getParameterByName( name,href )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 
 function URLToArray(url) {
-	var request = {};
+	var request = [];
 	var pairs = url.substring(url.indexOf('?') + 1).split('&');
 	for (var i = 0; i < pairs.length; i++) {
 		var pair = pairs[i].split('=');
-		request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+		var param = [];
+		
+		var key = decodeURIComponent(pair[0])
+		key = key.replace(/\s+/g, '');
+		
+		param['key'] = key;
+		param['value'] = decodeURIComponent(pair[1]);
+		request[i] = param;
 	}
 	return request;
 }
