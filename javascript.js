@@ -89,6 +89,8 @@ function reloadResult() {
 	}
 
 	$("input.url").val(url);
+	
+	console.log(url);
 
 	$.ajax({
 		dataType: "text",
@@ -264,7 +266,7 @@ function deleteHistory() {
 
 
 function urlencode(str) {
-	return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
+	return str.replace(/%/g, '%25').replace(/\+/g, '%2B').replace(/%25/g, '%');
 }
 
 function urldecode(str) {
