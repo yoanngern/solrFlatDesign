@@ -69,28 +69,10 @@ $(document).ready(function () {
 
 
 function reloadResult() {
-	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-	//For each input adds a get property to the query url
-	$("form input").each(function () {
-		if ($(this).val() != "") {
-			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
-		}
-		
-	});
 	
-	if ($("form textarea.custom").val() != "") {
-	
-	    console.log("test");
-	    var custom = URLToArray($("form textarea.custom").val());
-	    
-	    for (var i = 0; i < custom.length; i++) {
-    	    url = url + '&' + custom[i]['key'] + '=' + urlencode(custom[i]['value'].replace(/\s/g, ""));
-	    }
-	}
+	url = setURL();
 
 	$("input.url").val(url);
-	
-	console.log(url);
 
 	$.ajax({
 		dataType: "text",
@@ -141,9 +123,9 @@ function reloadResultFromURL(url) {
         
         if(!finded) {
             if(custom == "") {
-    	        custom = custom + search[i]['key'] + '=' + search[i]['value'];
+    	        custom = custom + search[i]['key'] + '=' + urldecode(search[i]['value']);
             } else {
-                custom = custom + '\n&\n' + search[i]['key'] + '=' + search[i]['value'];
+                custom = custom + '\n&\n' + search[i]['key'] + '=' + urldecode(search[i]['value']);
             }
         }
 	}
@@ -153,6 +135,28 @@ function reloadResultFromURL(url) {
 	reloadResult();
 	
 
+}
+
+function setURL() {
+    var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
+	//For each input adds a get property to the query url
+	$("form input").each(function () {
+		if ($(this).val() != "") {
+			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
+		}
+		
+	});
+	
+	if ($("form textarea.custom").val() != "") {
+	
+	    var custom = URLToArray($("form textarea.custom").val());
+	    
+	    for (var i = 0; i < custom.length; i++) {
+    	    url = url + '&' + custom[i]['key'] + '=' + urlencode(custom[i]['value']);
+	    }
+	}
+	
+	return url;
 }
 
 function getParameterByName( name,href )
@@ -179,7 +183,7 @@ function URLToArray(url) {
 		key = key.replace(/\s+/g, '');
 		
 		param['key'] = key;
-		param['value'] = decodeURIComponent(pair[1]);
+		param['value'] = pair[1];
 		request[i] = param;
 	}
 	return request;
@@ -187,17 +191,8 @@ function URLToArray(url) {
 
 
 function search() {
-	var url = 'http://localhost:8983/solr/select?indent=on&version=2.2';
-
-	$("form input").each(function () {
-		if ($(this).val() != "") {
-			url = url + '&' + $(this).attr("class") + '=' + urlencode($(this).val());
-		}
-	});
 	
-	if ($("form textarea.custom") != "") {
-    	url = url + '&' + $("form textarea.custom").val();
-	}
+	url = setURL();
 
 	window.location.href = url;
 }
@@ -266,11 +261,22 @@ function deleteHistory() {
 
 
 function urlencode(str) {
-	return str.replace(/%/g, '%25').replace(/\+/g, '%2B').replace(/%25/g, '%');
+	return str.replace(/\+/g, '%2B').replace(/\ /g, '%20');
 }
 
 function urldecode(str) {
-	return str.replace(/\+/g, " ");
+	return str
+	    .replace(/\+/g, " ")
+	    .replace(/%20/g, " ")
+	    .replace(/%2B/g, "+")
+	    .replace(/%3A/g, ":")
+	    .replace(/%2C/g, ",")
+	    .replace(/%28/g, "(")
+	    .replace(/%29/g, ")")
+	    .replace(/%7B/g, "{")
+	    .replace(/%7D/g, "}")
+	    .replace(/%5B/g, "[")
+	    .replace(/%5D/g, "]");
 }
 
 
