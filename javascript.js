@@ -130,7 +130,7 @@ function reloadResultFromURL(url) {
 	    $("form input").each(function () {
 		    var param = $(this).attr('class');
 		    if(param == search[i]['key']) {
-    		    $(this).val(search[i]['value']);
+    		    $(this).val(urldecode(search[i]['value']));
     		    finded = true;
 		    }
         });
@@ -264,6 +264,12 @@ function deleteHistory() {
 function urlencode(str) {
 	return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
 }
+
+function urldecode(str) {
+	return str.replace(/\+/g, " ");
+}
+
+
 
 //toggle the displayed label
 function setLabel() {
