@@ -79,7 +79,11 @@ function reloadResult() {
 	});
 	
 	if ($("form textarea.custom") != "") {
-    	url = url + '&' + $("form textarea.custom").val();
+	    var custom = URLToArray($("form textarea.custom").val());
+	    
+	    for (var i = 0; i < custom.length; i++) {
+    	    url = url + '&' + custom[i]['key'] + '=' + urlencode(custom[i]['value'].replace(/\s/g, ""));
+	    }
 	}
 
 	$("input.url").val(url);
