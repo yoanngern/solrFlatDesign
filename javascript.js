@@ -78,7 +78,9 @@ function reloadResult() {
 		
 	});
 	
-	if ($("form textarea.custom") != "") {
+	if ($("form textarea.custom").val() != "") {
+	
+	    console.log("test");
 	    var custom = URLToArray($("form textarea.custom").val());
 	    
 	    for (var i = 0; i < custom.length; i++) {
